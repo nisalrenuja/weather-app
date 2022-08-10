@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-import {IoMdSunny,IoMdRainy,IoMdCloud,IoMdSnow,IoMdThunderstorm,IoMdSearch} from 'react-icons/io';
+import {IoMdSunny,IoMdRainy,IoMdCloudy,IoMdSnow,IoMdThunderstorm,IoMdSearch} from 'react-icons/io';
 import {BsCloudHaze2Fill,BsCloudDrizzleFill,BsEye,BsWater,BsThermometer,BsWind} from 'react-icons/bs';
 import {TbTemperatureCelsius} from 'react-icons/tb';
 import {ImSpinner8} from 'react-icons/im';
@@ -20,7 +20,7 @@ const App = () => {
     });
   },[location]);
 
-  console.log(data);
+  // console.log(data);
 
   if(!data){
     return(
@@ -31,7 +31,35 @@ const App = () => {
       </div>
     )
   }
-  return <div>react app</div>;
+
+  let icon;
+  console.log(data.weather[0].main);
+
+  switch(data.weather[0].main){
+    case 'Clouds':
+      icon = <IoMdCloudy />;
+      break;
+    case 'Haze':
+      icon = <BsCloudHaze2Fill />;
+      break;
+    case 'Rain':
+      icon = <IoMdRainy />;
+      break;
+    case 'Clear':
+      icon = <IoMdSunny />;
+      break;
+    case 'Dizzle':
+      icon = <BsCloudDrizzleFill />;
+      break;
+    case 'Snow':
+      icon = <IoMdSnow />;
+      break;
+    case 'Thunderstorm':
+      icon = <IoMdThunderstorm />;
+      break;
+  }
+
+  return <div className='text-6x1'>{icon}</div>;
 };
 
 export default App;
